@@ -1,2 +1,2 @@
 # MastoWrapper
-Mastodon Python Wrapper
+Mastodon Python Wrapper modified a bitds

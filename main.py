@@ -61,6 +61,8 @@ class machine:
         self.stdout(msg)
         return msg
 
+    def scripter(self):
+        print("Complete")
 
     def connect(self, tokenid=None, token=None, appname=None):
         self.stdout("CALL FOUND...")
