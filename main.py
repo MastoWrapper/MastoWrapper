@@ -56,6 +56,9 @@ class machine:
         else:
             return
 
+    def new(self):
+        print()
+
     def detail(self):
         msg = (f"Verefa Python Client Package\nAuthored:Verefa Admin\nOwned:Verefa\nLicensing:Usage!=other\nReturns:https://backend.verefa.com/\nSession:{self.session}\nToken:{self.token}\nTokenid:{self.tokenid}")
         self.stdout(msg)
