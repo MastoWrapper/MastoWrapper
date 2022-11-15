@@ -5,21 +5,21 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
 	# Here is the module name.
-	name="akshaypawar_tut",
+	name="MastoWrapper",
 
 	# version of the module
-	version="0.0.1",
+	version="1.0.1",
 
 	# Name of Author
-	author="Akshay Pawar",
+	author="Robottik Software",
 
 	# your Email address
-	author_email="akshaygpawar15@gmail.com",
+	author_email="admin@robottik.co.uk",
 
 	# #Small Description about module
 	# description="adding number",
 
-	# long_description=long_description,
+	#long_description=long_description,
 
 	# Specifying that we are using markdown file for description
 	long_description=long_description,
@@ -41,12 +41,12 @@ setuptools.setup(
 	# ],
 
 
-	license="MIT",
+	license="GNU",
 
 	# classifiers like program is suitable for python3, just leave as it is.
 	classifiers=[
 		"Programming Language :: Python :: 3",
-		"License :: OSI Approved :: MIT License",
+		"License :: OSI Approved :: GNU License",
 		"Operating System :: OS Independent",
 	],
 )
