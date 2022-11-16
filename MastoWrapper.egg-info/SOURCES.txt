@@ -1,9 +1,0 @@
-LICENSE
-README.md
-setup.py
-MastoWrapper/__init__.py
-MastoWrapper/main.py
-MastoWrapper.egg-info/PKG-INFO
-MastoWrapper.egg-info/SOURCES.txt
-MastoWrapper.egg-info/dependency_links.txt
-MastoWrapper.egg-info/top_level.txt

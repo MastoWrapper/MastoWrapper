@@ -17,6 +17,13 @@ import socket
 class Client:
     def __init__(self,name=None,token=None,address=None,scopes=None):
         try:
+            if scopes == None:
+                self.scopes = "read"
+            elif ("read" in scopes) == False:
+                self.scopes = (f"{scopes} read")
+            else:
+                self.scopes = scopes
+
             self.active = False
             self.address = address
             self.token = token
@@ -27,11 +34,12 @@ class Client:
                 "token":f"{address}/oauth/token",
                 "account":f"{address}/api/v1/accounts"
             }
+            self.commands = {}
             headings = {"Authorization":f"Bearer {token}"}
             final_response = requests.get(f"{address}/api/v1/accounts/verify_credentials", headers = headings)
             if final_response.status_code == 200:
                 self.active = True
-                return 200
+                return
             else:
                 self.active = False
         except Exception as e:
@@ -42,8 +50,12 @@ class Client:
 
     def account_info(self):
         if self.active == True:
-            for data in self.app_instance:
-                print(data)
+            headings = {"Authorization":f"Bearer {self.token}"}
+            account_data = requests.get(f"{self.address}/api/v1/accounts/verify_credentials", headers = headings)
+            for data in account_data.json():
+                print(f"{data}:{account_data.json()[data]}")
+
+
 
 
     def toot(self,word):
@@ -54,4 +66,13 @@ class Client:
             print(oauth_response)
 
 
+    def command(self,p_func):
+        self.commands[p_func.__name__] = p_func
+        print(f"Created and stored command ({p_func.__name__}) to root.")
+        def runner(*args,**kwargs):
+            p_func(*args,**kwargs)
+        return runner
 
+    def list_commands(self):
+        for obj in self.commands:
+            print(self.commands[obj])

@@ -5,5 +5,5 @@ MastoWrapper is a Mastodon API wrapper dedicated to providing a simplistic but p
 _**Streaming**_
 > The MastoWrapper supports streaming to functions which are called after decorators.
 
-_**Tooting**__
+_**Tooting**_
 > obj.toot("Hello World!")
