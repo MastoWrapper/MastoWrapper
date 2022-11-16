@@ -8,7 +8,7 @@ setuptools.setup(
 	name="MastoWrapper",
 
 	# version of the module
-	version="1.0.2",
+	version="1.0.3",
 
 	# Name of Author
 	author="Robottik Software",
