@@ -11,6 +11,7 @@ import sys
 import json
 import requests
 import socket
+import threading
 
 
 
@@ -48,6 +49,25 @@ class Client:
             return e
 
 
+    def listener(self,watch=None):
+        while self.active == True:
+            time.sleep(1)
+            if watch == "commands":
+                print("Checking for toot events.")
+            elif watch == "events":
+                print("Checking for general events.")
+            else:
+                print("Checking for general events.")
+            
+
+
+    def run(self):
+        ## Create listener threads to listen for all instances of @command/@event
+        command_listener = threading.Thread(target=self.listener,args=("commands",)).start()
+        event_listener = threading.Thread(target=self.listener,args=("events",)).start()
+
+
+
     def account_info(self):
         if self.active == True:
             headings = {"Authorization":f"Bearer {self.token}"}
@@ -76,3 +96,5 @@ class Client:
     def list_commands(self):
         for obj in self.commands:
             print(self.commands[obj])
+
+    
