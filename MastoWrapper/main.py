@@ -36,6 +36,7 @@ class Client:
                 "account":f"{address}/api/v1/accounts"
             }
             self.commands = {}
+            self.events = {}
             headings = {"Authorization":f"Bearer {token}"}
             final_response = requests.get(f"{address}/api/v1/accounts/verify_credentials", headers = headings)
             if final_response.status_code == 200:
@@ -93,8 +94,15 @@ class Client:
             p_func(*args,**kwargs)
         return runner
 
-    def list_commands(self):
+    def event(self,p_func):
+        self.events[p_func.__name__] = p_func
+        print(f"Created and stored event ( {p_func.__name__}) to root.")
+        def runner(*args,**kwargs):
+            p_func(*args,**kwargs)
+        return runner
+
+    def handles(self):
         for obj in self.commands:
             print(self.commands[obj])
-
-    
+        for obj in self.events:
+            print(self.events[obj])
