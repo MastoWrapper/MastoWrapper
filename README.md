@@ -9,4 +9,8 @@ _**Streaming**_
 
 _**Tooting**_
 > obj.toot("Hello World!")
+
+
+
+
 ![MastoWrapper-Main](https://user-images.githubusercontent.com/47396684/202267322-eefa5068-9ad4-4ab2-add5-4f9def00fbb5.png)
