@@ -40,6 +40,7 @@ class Client:
             self.auth_headings = {"Authorization":f"Bearer {token}"}
             final_response = requests.get(f"{address}/api/v1/accounts/verify_credentials", headers = self.auth_headings)
             if final_response.status_code == 200:
+                self.account_id = final_response.json()["id"]
                 self.active = True
                 return
             else:
@@ -55,7 +56,20 @@ class Client:
             time.sleep(1)
             if watch == "commands":
                 print("Checking for commands.")
+                result = self.timeline(limit=1,remote=None)
+                #print(result["mentions"])
+                try:
+                    print("Here are the mentions:")
+                    print(result)
+                    print(result["mentions"])
+                    targetted = result["mentions"]["id"]
+                    print(targetted)
+                    if int(targetted) == self.account_id:
+                        print("Found a message which mentions this account.")
 
+                except Exception as error:
+                    print(error)
+                    pass
 
 
 
