@@ -19,7 +19,7 @@ class Client:
     def __init__(self,name=None,token=None,address=None,scopes=None):
         try:
             if scopes == None:
-                self.scopes = "read"
+                self.scopes = "read read:statuses"
             elif ("read" in scopes) == False:
                 self.scopes = (f"{scopes} read")
             else:
@@ -37,8 +37,8 @@ class Client:
             }
             self.commands = {}
             self.events = {}
-            headings = {"Authorization":f"Bearer {token}"}
-            final_response = requests.get(f"{address}/api/v1/accounts/verify_credentials", headers = headings)
+            self.auth_headings = {"Authorization":f"Bearer {token}"}
+            final_response = requests.get(f"{address}/api/v1/accounts/verify_credentials", headers = self.auth_headings)
             if final_response.status_code == 200:
                 self.active = True
                 return
@@ -54,11 +54,15 @@ class Client:
         while self.active == True:
             time.sleep(1)
             if watch == "commands":
-                print("Checking for toot events.")
+                print("Checking for commands.")
+
+
+
+
             elif watch == "events":
-                print("Checking for general events.")
+                print("Checking for events.")
             else:
-                print("Checking for general events.")
+                print("Checking for events.")
             
 
 
@@ -85,6 +89,30 @@ class Client:
             params = {"status": word}
             oauth_response = requests.post(f"{self.address}/api/v1/statuses", data=params,headers=headers)
             print(oauth_response)
+
+
+
+    def timeline(self,limit=20,since_id=None,max_id=None,min_id=None,local=False,remote=False,only_media=False):
+        #"It appears that the 'remote' parameter is not functional on some mastodon instances so it is currently set as False, to collect data you must therefore set remote=None in your requests."
+
+        try:
+            limit = int(limit)
+            if since_id != None:
+                since_id = str(since_id)
+            if max_id != None:
+                max_id = str(max_id)
+            if min_id != None:
+                min_id = str(min_id)
+
+            params = {"local": local, "remote":remote, "only_media":only_media, "max_id":max_id,"since_id":since_id,"min_id":min_id,"limit":limit}
+            response = requests.get(f"{self.address}/api/v1/timelines/public", data=params, headers = self.auth_headings)
+            if response.status_code == 200:
+                returned_data = response.json()
+                return(returned_data)
+            else:
+                return (response)
+        except Exception as error:
+            return (error)
 
 
     def command(self,p_func):
