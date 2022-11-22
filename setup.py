@@ -46,7 +46,7 @@ setuptools.setup(
 	# classifiers like program is suitable for python3, just leave as it is.
 	classifiers=[
 		"Programming Language :: Python :: 3",
-		"License :: OSI Approved :: GNU License",
+		"License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
 		"Operating System :: OS Independent",
 	],
 )
