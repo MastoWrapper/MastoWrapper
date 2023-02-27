@@ -12,8 +12,6 @@ import json
 import requests
 import socket
 import threading
-import verefa
-
 
 
 
